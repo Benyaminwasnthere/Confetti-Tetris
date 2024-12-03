@@ -1,0 +1,132 @@
+/* Ensure the body and container elements have no margin or padding */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1e1e1e; /* Dark background color */
+}
+
+/* Create a container for both the game and leaderboard */
+.app-container {
+  display: flex;
+  flex-direction: column; /* Stack the components vertically */
+  justify-content: flex-start; /* Align the items to the top */
+  align-items: center; /* Center the items horizontally */
+  height: 100%;
+  width: 100%;
+}
+
+/* Container for the game canvas (same size as the leaderboard canvas) */
+.game-container {
+  width: 310px;  /* Same width as the canvas */
+  height: 600px; /* Same height as the canvas */
+  margin: 0;
+  padding: 0;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 250px;  /* Reduce the width of the auth container */
+  padding: 15px;     /* Reduce the padding inside the container */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 10px;  /* Reduce space around the heading */
+  font-size: 20px;      /* Adjust the font size to fit the smaller widget */
+}
+
+.firebase-ui-button {
+  width: 100%;
+  padding: 10px 15px;  /* Reduce padding */
+  font-size: 16px;     /* Reduce font size */
+  margin: 8px 0;       /* Reduce margin between buttons */
+  pointer-events: auto;
+}
+
+.firebase-ui-button:hover {
+  background-color: #333;
+}
+
+.firebaseui-idp-button {
+  background-color: #000 !important;
+  color: white !important;
+  border-radius: 4px !important;
+  padding: 10px 15px !important;  /* Reduce padding for the button */
+  font-size: 16px !important;     /* Adjust font size for the button */
+}
+
+.firebaseui-idp-button:hover {
+  background-color: #333 !important;
+}
+
+.firebaseui-idp-button .firebaseui-idp-icon {
+  filter: invert(1);
+}
+.go-to-leaderboard-button:hover {
+  background-color: #555;
+}
+/* Normalize button appearance */
+button {
+  all: unset; /* Resets all styles, including padding and border */
+  padding: 10px 20px; /* Add consistent padding */
+  background-color: #007bff; /* Set a consistent background color */
+  color: white; /* Text color */
+  font-size: 16px; /* Font size */
+  font-family: Arial, sans-serif; /* Use a consistent font */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  text-align: center; /* Center text in the button */
+  box-sizing: border-box; /* Include padding and border in width/height */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+/* Hover effect */
+button:hover {
+  background-color: #0056b3; /* Darken background on hover */
+  transform: scale(1.05); /* Slightly enlarge button */
+}
+
+/* Focus effect */
+button:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add custom focus outline */
+}
+
+/* Active effect */
+button:active {
+  background-color: #004085; /* Darken background on click */
+  transform: scale(1); /* Ensure no scale change on click */
+}
+
+/* Optional: Add space between buttons */
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Adjust spacing between buttons */
+  margin: 20px 0;
+}
+
+/* Make buttons responsive */
+@media (max-width: 768px) {
+  button {
+    padding: 3px 6.75px; /* Adjust padding for smaller screens */
+    font-size: auto; /* Smaller font size on smaller screens */
+  }
+}
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* This will center it vertically as well */
+  text-align: center; /* Optional: Center the text */
+}
+
