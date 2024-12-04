@@ -1,9 +1,9 @@
 import React from 'react';
 import { ReactP5Wrapper } from 'react-p5-wrapper'; // Corrected import
-import p5 from 'p5';
+//import p5 from 'p5';
 import { database, auth } from './firebase'; // Make sure you're importing Firebase config
 import { ref, get, update } from 'firebase/database';
-import  { useEffect, useState } from 'react';
+//import  { useEffect, useState } from 'react';
 
 // Define your p5.js sketch
 const sketch = (p5) => {
@@ -13,15 +13,17 @@ let gameOver = false;
 let finalScore = 0; // Variable to store the final score when the game ends
 let score = 0;
 let scales = 5;
-let grid, velocityGrid;
+let grid;
+//let  velocityGrid;
+
 let w = 5; // Cell size
 let cols, rows;
 let tetromino, position, hueValue;
-let gravity = 0.1;
+//let gravity = 0.1;
 let timeSinceLastDrop = 0;
 let dropInterval = 10; // milliseconds
 let visited = [];
-let colors = [0,50,270,150,200];
+//let colors = [0,50,270,150,200];
 let startButton; // Variable for the start button
 let gameStarted = false; // Flag to track if the game has started
 
@@ -30,7 +32,7 @@ let framesSinceLastChainCheck = 0;
 // Variables for touch controls
 let touchStart = { x: 0, y: 0 }; // To track initial touch position
 
-let bgImage; // Variable to store the background GIF
+//let bgImage; // Variable to store the background GIF
 
 //----------------------------
 const swipeThreshold = 25;  // Adjust this value to make the swipe less sensitive
@@ -59,6 +61,7 @@ p5.touchMoved = (e) => {
       }
     }
     // Vertical swipe: Rotate on swipe up if the swipe is larger than the threshold
+
     else {
       if (dy < -swipeThreshold) { // Only rotate if the swipe is up and exceeds threshold
         rotateTetromino(); // Rotate on swipe up
@@ -75,9 +78,7 @@ p5.touchMoved = (e) => {
   return false; // Prevent default
 };
 
-p5.touchEnded = (e) => {
-  return false; // Prevent default
-};
+
 
 
 
@@ -196,7 +197,7 @@ p5.touchEnded = (e) => {
      cols = p5.width / w;
      rows = p5.height / w;
      grid = make2DArray(cols, rows); // Initialize grid
-     velocityGrid = make2DArray(cols, rows); // Initialize velocity grid
+     //velocityGrid = make2DArray(cols, rows); // Initialize velocity grid
      createNewTetromino(); // Create the first Tetromino
      visited = new Array(cols).fill(null).map(() => new Array(rows).fill(false)); // Initialize visited grid
      startButton = { x: width / 2 - 50, y: height / 2 - 25, width: 100, height: 50 };
@@ -208,13 +209,13 @@ p5.touchEnded = (e) => {
 
    function applySandPhysics() {
      let nextGrid = make2DArray(cols, rows);
-     let nextVelocityGrid = make2DArray(cols, rows);
+     //let nextVelocityGrid = make2DArray(cols, rows);
 
      for (let i = 0; i < cols; i++) {
        for (let j = rows - 1; j >= 0; j--) {
          if (grid[i][j].occupied) {
            let state = grid[i][j];
-           let velocity = 1; // Adjust for vertical velocity, if needed
+           //let velocity = 1; // Adjust for vertical velocity, if needed
            let moved = false;
 
            // Check if the block can fall further down
@@ -225,7 +226,7 @@ p5.touchEnded = (e) => {
                occupied: true,
                color: state.color
              };
-             nextVelocityGrid[i][newPos] = velocity + gravity;
+             //nextVelocityGrid[i][newPos] = velocity + gravity;
              moved = true;
            } else {
              // Check adjacent cells (left or right) for possible movement
@@ -241,14 +242,14 @@ p5.touchEnded = (e) => {
                  occupied: true,
                  color: state.color
                };
-               nextVelocityGrid[i + dir][j + 1] = velocity + gravity;
+               //nextVelocityGrid[i + dir][j + 1] = velocity + gravity;
                moved = true;
              } else if (belowB === undefined || belowB.occupied === false) {
                nextGrid[i - dir][j + 1] = {
                  occupied: true,
                  color: state.color
                };
-               nextVelocityGrid[i - dir][j + 1] = velocity + gravity;
+               //nextVelocityGrid[i - dir][j + 1] = velocity + gravity;
                moved = true;
              }
            }
@@ -256,7 +257,7 @@ p5.touchEnded = (e) => {
            // If no movement occurred, keep the block in place
            if (!moved) {
              nextGrid[i][j] = grid[i][j];
-             nextVelocityGrid[i][j] = velocity + gravity;
+             //nextVelocityGrid[i][j] = velocity + gravity;
            }
          }
        }
@@ -264,7 +265,7 @@ p5.touchEnded = (e) => {
 
      // Update the grid and velocity grid after the physics simulation
      grid = nextGrid;
-     velocityGrid = nextVelocityGrid;
+     //velocityGrid = nextVelocityGrid;
    }
 
    // Helper function to check if the column index is valid
@@ -567,7 +568,7 @@ function rotateTetromino() {
 
     finalScore=score;
 
-
+    var fScore = finalScore
 
 
 
@@ -592,9 +593,10 @@ function rotateTetromino() {
                       const currentHighscore = snapshot.val().highscore;
 
                       // If the final score is higher than the current highscore, update the database
-                      if (finalScore > currentHighscore) {
+
+                      if (fScore > currentHighscore) {
                           update(userRef, {
-                              highscore: finalScore
+                              highscore: fScore
                           }).then(() => {
                               console.log('Highscore updated successfully');
                           }).catch((error) => {
@@ -632,7 +634,7 @@ function rotateTetromino() {
     // Reset game state variables
     gameStarted = false;  // Ensure the game is marked as not started
     grid = make2DArray(cols, rows);  // Reset the grid
-    velocityGrid = make2DArray(cols, rows);  // Reset velocity grid
+    //velocityGrid = make2DArray(cols, rows);  // Reset velocity grid
     visited = new Array(cols).fill(null).map(() => new Array(rows).fill(false)); // Reset visited grid
     createNewTetromino();  // Create a new Tetromino for the next round
     timeSinceLastDrop = 0;  // Reset the drop timer
