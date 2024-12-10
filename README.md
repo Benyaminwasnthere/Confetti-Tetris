@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# Confetti Tetris
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Confetti Tetris is a unique twist on the classic Tetris game. When tetrominoes land, they burst into confetti, introducing a visually stunning and engaging mechanic. The confetti pieces follow realistic physics, adding an extra layer of dynamism to the gameplay. Additionally, the game features a modified Breadth-First Search (BFS) algorithm to detect chains of the same-colored confetti stretching from the left to the right end of the board. Completing such chains deletes the chains, adds points to the score.
 
-In the project directory, you can run:
+The game uses **Firebase** for backend services, **React** for the frontend, and **p5.js** for creating the interactive game experience.
 
-### `npm start`
+Players can enjoy the game without logging in, but those who choose to log in with their Google accounts can have their high scores saved to the Firebase Realtime Database.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- **Confetti Physics**: Tetrominoes explode into colorful confetti upon landing, which behave according to realistic physics.
+- **Chain Detection**: A custom BFS algorithm identifies chains of same-colored confetti spanning the board, triggering special bonuses and increasing the score.
+- **Optional Google Sign-In**: Players can log in with Firebase Authentication for a personalized experience and high score tracking.
+- **Realtime Database**: Firebase Realtime Database stores user data, including high scores, for logged-in users.
+- **Interactive Gameplay**: A dynamic game built with p5.js.
+- **Responsive UI**: Optimized for both desktop and mobile devices.
+- **Automatic Score Saving**: Logged-in users' scores are saved only if they surpass their existing high score.
+- **Automatic Deployment Pipeline**: Through simple GitHub push, which triggers building of the project, and automatic deployment to Firebase hosting.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build -- --no-fail-on-warnings `
+## Game Rules
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Users can play the game without logging in.
+2. Move and rotate tetrominoes to fill rows and score points.
+3. Tetrominoes burst into confetti when they land, introducing a new layer of gameplay.
+4. A BFS algorithm detects same-colored chains of confetti, enabling combo scoring and chain deletions.
+5. If a logged-in user’s current score exceeds their stored high score, the new score is saved automatically in Firebase.
+6. The game ends if no valid moves are left, and players can restart to try again.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Technologies Used
 
-### `npm run eject`
+- **React**: Framework for building the UI and managing components.
+- **Firebase**: Backend services for optional authentication, database, and hosting.
+- **p5.js**: JavaScript library for rendering the game.
+- **React Router**: Navigation between game and optional login pages.
+- **CSS**: Styling for the application.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Algorithms Involved
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 1. Confetti Physics
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+When a tetromino lands, it bursts into colorful confetti pieces.  
+The confetti pieces follow realistic physics, including gravity and collisions.
 
-## Learn More
+## 2. Chain Detection
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+A modified BFS algorithm identifies chains of same-colored confetti extending from the left to the right end of the board.  
+Completing such chains deletes the chains, adds points to the score.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 3. Score Management
 
-### Code Splitting
+The game tracks the user’s score dynamically during gameplay.  
+If a logged-in user’s score exceeds their current high score in Firebase, it updates automatically.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 4. Database Interaction
 
-### Analyzing the Bundle Size
+Firebase Realtime Database stores user profiles and high scores under the `users` path.  
+When a new user logs in, a record is created with their email and an initial high score of 0.
+## 4. Authentication 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Firebase Authentication makes sure real users are logged in
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# Build and Deployment
 
-### Advanced Configuration
+## Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**You can skip steps 1 and 2 if you clone my project as it is.**
 
-### Deployment
+Before getting started, ensure you have the following installed:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- **Node.js**: [Download Node.js](https://nodejs.org/).
+- **Firebase CLI**: Install globally by running:
+  ```bash
+  npm install -g firebase-tools
+  ```
+# Steps to Run Locally
 
-### `npm run build` fails to minify
+1. **Clone the Repository**
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+   
+# Set Up Firebase
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Go to [Firebase Console](https://console.firebase.google.com/).
+2. Create a new project.
+3. Enable Google Sign-In under **Authentication > Sign-In Methods** (optional).
+4. Enable Realtime Database and set its rules to allow authenticated access.
+5. Copy the Firebase configuration object from **Project Settings > General**.
+6. Replace the placeholder configuration in `firebase.js` with your Firebase config.
+7. Commit changes to your local repository.
+8. Push Changes to Remote to initiate build and deploy process in github
+
+# Firebase Configuration
+
+```javascript
+const firebaseConfig = {
+  apiKey: "your-api-key",
+  authDomain: "your-auth-domain",
+  databaseURL: "your-database-url",
+  projectId: "your-project-id",
+  storageBucket: "your-storage-bucket",
+  messagingSenderId: "your-messaging-sender-id",
+  appId: "your-app-id"
+};
+```
+# Git Workflow: Make Changes and Push to Remote
+
+
+Commit changes to your local repository using the following commands:
+
+```bash
+git add .
+git commit -m "Your commit message"
+```
+
+# Push Changes to Remote
+
+Once you're ready to share your changes with others, use `git push` to upload them to the remote repository:
+
+```bash
+git push origin branch-name
+```
+## Project demo
+https://confetti-3b50f.web.app/game
